@@ -6,7 +6,7 @@
 /*   By: luifer <luifer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:44:45 by luifer            #+#    #+#             */
-/*   Updated: 2025/08/20 14:34:39 by luifer           ###   ########.fr       */
+/*   Updated: 2025/08/20 14:42:48 by luifer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,20 @@ int main() {
     mstack.push(420);
     mstack.push(4200);
     mstack.push(420000);
-    mstack.push(4200000);
+    mstack.push(4300000);
     
     std::cout << "Stack size: " << mstack.size() << std::endl;
     std::cout << "Top element: " << mstack.top() << std::endl;
     
     // Now the magic: iterate through the stack!
-    std::cout << "\nIterating bottom to top (normal iterator): 🧙‍♂️ 🧙‍♂️ 🧙‍♂️" << std::endl;
+    std::cout << "\nIterating bottom to top (normal iterator): 🫥 🫥 🫥" << std::endl;
     for (MutantStack<int>::iterator it = mstack.begin(); it != mstack.end(); ++it) {
         std::cout << *it << ", ";
     }
     std::cout << std::endl;
     
     // Iterate top to bottom (reverse iterator - stack-like order)
-    std::cout << "\nIterating top to bottom (reverse iterator): 🧙‍♂️ 🧙‍♂️ 🧙‍♂️" << std::endl;
+    std::cout << "\nIterating top to bottom (reverse iterator): 🫥 🫥 🫥" << std::endl;
     for (MutantStack<int>::reverse_iterator rit = mstack.rbegin(); rit != mstack.rend(); ++rit) {
         std::cout << *rit << ", ";
     }
