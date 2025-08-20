@@ -6,7 +6,7 @@
 /*   By: luifer <luifer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 13:22:20 by luifer            #+#    #+#             */
-/*   Updated: 2025/08/19 14:06:12 by luifer           ###   ########.fr       */
+/*   Updated: 2025/08/20 11:37:16 by luifer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 #include <algorithm>
 #include <string>
 #include <limits.h>
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
 
 class Span{
     private:
@@ -34,6 +37,8 @@ class Span{
         
         // methods
         void addNumber(int number);
+
+        void addBatch(int size);
         //find the minimun diff possible between all the numbers
         int shortestSpan() const;
         //find the maximun diff possible between all the numbers
@@ -43,20 +48,19 @@ class Span{
         unsigned int getSize();
         
         //Classes for exceptions 
-        class NoSpanFound : public std::exception {
+        class NoSpanFoundException : public std::exception {
             public:
                 const char* what() const throw() {
                     return "Not enough elements to find a Span";
                 }
         };
 
-        class SpanFull : public std::exception {
+        class SpanFullException : public std::exception {
             public:
                 const char* what() const throw() {
                     return "Span is full, no space available";
                 }
         };
-
 };
 
 #endif
