@@ -6,7 +6,7 @@
 /*   By: luifer <luifer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 13:37:08 by luifer            #+#    #+#             */
-/*   Updated: 2025/08/20 11:40:56 by luifer           ###   ########.fr       */
+/*   Updated: 2025/08/20 12:23:23 by luifer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,33 +38,34 @@ void Span::addNumber(int n) {
     this->_setOfNums.push_back(n);
 }
 
-//sort the vector and find the max element and the previous
-//then substract and get the longest span
-//previous solution was not optimal
+//sort the vector and initialize the min to the diff between 1st and 2nd element
+//iterate the vector to compare this diff between numbers and check if there is a minimum
+//update when found and return the value
 int Span::shortestSpan() const {
     if (this->_setOfNums.size() < 2)
         throw NoSpanFoundException();
     std::vector<int> copy = this->_setOfNums;
     std::sort(copy.begin(), copy.end());
-    int min1 = copy[0];
-    int min2 = copy[1];
+    int shortest = copy[1] - copy[0];
+    for(size_t i = 0; i < copy.size() - 1; i++) {
+        int diff = copy[i + 1] - copy[i];
+        if(diff < shortest){
+            shortest = diff;
+        }
+    }
     //int min1 = *std::min_element(_setOfNums.begin(), _setOfNums.begin() + _setOfNums.size() / 2);
     //int min2 = *std::min_element(_setOfNums.begin() + _setOfNums.size() / 2, _setOfNums.end());
-    return min2 - min1;
+    return shortest;
 }
 
-//sort the vector and find the max element and the previous
-//then substract and get the longest span
+//sort the vector and find the last element aka the maximum
+//then substract the 1st element aka minimun and get the longest span
 int Span::longestSpan() const {
     if (this->_setOfNums.size() < 2)
         throw NoSpanFoundException();
     std::vector<int> copy = this->_setOfNums;
     std::sort(copy.begin(), copy.end());
-    int max1 = copy[copy.size() - 1];
-    int max2 = copy[copy.size() - 2];
-    //int max1 = *std::max_element(_setOfNums.begin(), _setOfNums.begin() + _setOfNums.size() / 2);
-    //int max2 = *std::max_element(_setOfNums.begin() + _setOfNums.size() / 2, _setOfNums.end());
-    return max1 - max2;
+    return (copy[copy.size() - 1] - copy[0]);
 }
 
 //Getter for the size of the vector
@@ -76,14 +77,20 @@ unsigned int Span::getSize() {
 //it should insert the numbers into the Span
 //and handle the case when the Span is full
 void Span::addBatch(int size){
-    std::srand(std::time(0));
-    Span large = Span(10000);
+    //check if the batch can fit
+    if(this->_setOfNums.size() + size > this->_size){
+        throw SpanFullException();
+    }
+
     for (int i = 0; i < size; i++){
-        large.addNumber(std::rand() % 100);
+        this->_setOfNums.push_back(std::rand() % INT_MAX); //Using a bigger range to avoid duplicates
     }
-    try {
-        this->_setOfNums.insert(this->_setOfNums.end(), large._setOfNums.begin(), large._setOfNums.end());
-    } catch (const Span::SpanFullException& e) {
-        std::cerr << e.what() << std::endl;
+}
+
+//Function to print the content of the Span
+void Span::printContent() const {
+    for (size_t i = 0; i < this->_setOfNums.size(); i++){
+        std::cout << this->_setOfNums[i] << " ";
     }
+    std::cout << std::endl;
 }

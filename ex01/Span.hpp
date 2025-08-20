@@ -6,7 +6,7 @@
 /*   By: luifer <luifer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 13:22:20 by luifer            #+#    #+#             */
-/*   Updated: 2025/08/20 11:37:16 by luifer           ###   ########.fr       */
+/*   Updated: 2025/08/20 12:03:11 by luifer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
+
+#define BLU "\e[1;94m"
+#define RED "\e[1;91m"
+#define GRE "\e[1;92m"
+#define RST "\033[0m"
 
 class Span{
     private:
@@ -43,6 +48,8 @@ class Span{
         int shortestSpan() const;
         //find the maximun diff possible between all the numbers
         int longestSpan() const;
+        //print the content of the Span
+        void printContent() const;
 
         // Getters
         unsigned int getSize();

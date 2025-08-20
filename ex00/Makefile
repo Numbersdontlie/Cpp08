@@ -28,3 +28,9 @@ clean:
 fclean: clean
 		rm -f $(NAME)
 		@echo "$(RED)$(NAME) was deleted $(RESET)"
+
+
+re: fclean all
+		@echo "$(BLUE) let's do it again! XD :) :O .|. .|. $(RESET)"
+
+.PHONY: all clean fclean re
